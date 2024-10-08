@@ -2,8 +2,18 @@ import React from 'react';
 import "../css/Admin.css"; 
 import coopLogo from '../pic/cooplogo.png';
 import secondLogo from '../pic/3.png'; 
+import { useNavigate } from 'react-router-dom';
 
-function AdminPage() {
+const AdminPage = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem('memId');
+    localStorage.removeItem('role');
+
+    // Navigate to the login page
+    navigate('/');
+  };
+
   return (
     <div className="admin-page">
         <header className="landing-header">
@@ -19,10 +29,13 @@ function AdminPage() {
               <li><a href="/membership">Membership</a></li>
               <li><a href="/branches">Branches</a></li>
               <li><a href="/faq">FAQ</a></li>
+              <li><button className="logout-btn" onClick={handleLogout}>Logout</button></li>
             </ul>
           </nav>
         </header>
-
+        <header className="dashboard-header">
+        <h1>Admin Dashboard</h1>
+      </header>
       <main className="admin-content">
 
         <section className="admin-actions">
@@ -40,8 +53,48 @@ function AdminPage() {
         </section>
       </main>
 
-      <footer className="admin-footer">
-        <p>&copy; 2024 MSU-IIT National Multi-Purpose Cooperative. All rights reserved.</p>
+      {/* Footer Section */}
+      <footer className="footer">
+        <div className="footer-content">
+          <div className="footer-left">
+            <img src={coopLogo} alt="Coop Logo" className="footer-logo" />
+            <p>
+              Head Office: Gregorio T. Lluch Sr. Ave, Pala-o Iligan City, 9200, Philippines <br />
+              Phone: (063) 222-5574 <br />
+              Email: msuiitmpc@msuicoop.org <br />
+              Webmail, HR Max, IT Support Desk, e-Survey
+            </p>
+          </div>
+          <div className="footer-section resources">
+            <h4>Resources</h4>
+            <ul>
+              <li>FAQs</li>
+              <li>Policy Guidelines</li>
+              <li>Help Center</li>
+            </ul>
+          </div>
+          <div className="footer-section quick-links">
+            <h4>Quick Links</h4>
+            <ul>
+              <li>About</li>
+              <li>Become a Member</li>
+              <li>Loan Products</li>
+              <li>Financial Services</li>
+            </ul>
+          </div>
+          <div className="footer-section admin-links">
+            <h4>Admin Links</h4>
+            <ul>
+              <li>Membership Management</li>
+              <li>POS Management</li>
+              <li>Loan Management</li>
+              <li>Wellness Programs Management</li>
+            </ul>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <p>&copy; MSU-IIT National Multi-Purpose Cooperative 2024 | Privacy Policy | Terms & Conditions</p>
+        </div>
       </footer>
     </div>
   );

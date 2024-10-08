@@ -10,6 +10,13 @@ import { useNavigate } from 'react-router-dom';
 const MemberDashboard = () => {
  const navigate = useNavigate();
 
+  const handleLogout = () => {
+    localStorage.removeItem('memId');
+    localStorage.removeItem('role');
+
+    // Navigate to the login page
+    navigate('/');
+  };
     const handleClick = () => {
         navigate('/memberdash');
     }; 
@@ -65,6 +72,9 @@ const MemberDashboard = () => {
             </li>
             <li className={activeTab === 'transactions' ? 'active' : ''} onClick={() => setActiveTab('transactions')}>
               View Transactions
+            </li>
+            <li className={activeTab === 'logout' ? 'active' : ''} onClick={handleLogout}>
+              Logout
             </li>
           </ul>
         </nav>
